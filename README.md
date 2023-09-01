@@ -1,5 +1,8 @@
+
+Demo: https://bunkie.app
+
 # Landing Page
-This is a reusable landing page project.
+A reusable waitlist landing page with Firestore, Mixpanel and Nextjs. (Takes ~5 minutes  to set up and can be hosted on Vercel for free)
 
 ---
 # How to use
