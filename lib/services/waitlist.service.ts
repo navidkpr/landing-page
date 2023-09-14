@@ -1,6 +1,6 @@
 export default class WaitlistService {
     async register(email: string) {
-        const response = await fetch('http://localhost:3000/api/waitlist/register', {
+        const response = await fetch('/api/waitlist/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
