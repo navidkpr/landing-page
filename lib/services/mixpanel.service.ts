@@ -1,5 +1,5 @@
 import mixpanel from "mixpanel-browser"
-import AppConfig from "../../config/app_config"
+import ClientAppConfig from "../../config/client_app_config"
 
 export class MixpanelTracking {
     private static _instance: MixpanelTracking
@@ -16,7 +16,7 @@ export class MixpanelTracking {
             throw new Error('Error: Instance Creation of MixpanelTracking is not allowed. Use Mixpanel.getInstance instead.')
         }
         try {
-            mixpanel.init(AppConfig.Mixpanel.ProjectId as string, { debug: AppConfig.Mixpanel.DebugEnabled })
+            mixpanel.init(ClientAppConfig.Mixpanel.ProjectId as string, { debug: ClientAppConfig.Mixpanel.DebugEnabled })
         } catch (error) {
             console.log('Mixpanel blocked by privacy settings or ad blocker')
         }
@@ -48,7 +48,7 @@ export class MixpanelTracking {
     }
 
     public track(name: string, data: any = {}) {
-        data['Environment'] = AppConfig.Env
+        data['Environment'] = ClientAppConfig.Env
         try {
             mixpanel.track(name, { ...data, Source: this.getSource()})
         } catch (error) {
@@ -66,5 +66,9 @@ export class MixpanelTracking {
 
     public formSubmitted(formName: string, form_data: object = {}) {
         this.track('form_submitted', { Name: formName, 'Form Data': form_data })
+    }
+
+    public buttonClicked(buttonName: string, extraData: any = {}) {
+        this.track('button_clicked', { Name: buttonName, ...extraData })
     }
 }
